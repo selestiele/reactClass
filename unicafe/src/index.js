@@ -26,44 +26,19 @@ import ReactDOM from 'react-dom';
 
 const Statistics = (props) => {
 
-    const total = props.good + props.neutral + props.bad;
-    const positive = ((props.good/total) * 100);
+    
 
-    if (total === 0) {
+    if (props.total === 0) {
         return (
             <p>No feedback given.</p>
         )
     }
 
     return (
-        <table>
-            <tr>
-                <td>Good</td>
-                <td>{props.good}</td>
-            </tr>
-            <tr>
-                <td>Neutral</td>
-                <td>{props.neutral}</td>
-            </tr>
-            <tr>
-                <td>Bad</td>
-                <td>{props.bad}</td>
-            </tr>
-            <tr>
-                <td>Total</td>
-                <td>{total}</td>
-            </tr>
-            <tr>
-                <td>Average</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Positive</td>
-                <td>{positive}%</td>
-            </tr>
-            
-            
-        </table>
+        <tr>
+            <td>{props.text}</td>
+            <td>{props.data}</td>
+        </tr>
     )
 }
 
@@ -88,6 +63,8 @@ const App = (props) => {
     const [good, setGood] = React.useState(0);
     const [neutral, setNeutral] = React.useState(0);
     const [bad, setBad] = React.useState(0);
+    const total = good + neutral + bad;
+    const positive = ((good/total) * 100);
     
     
 
@@ -96,7 +73,17 @@ const App = (props) => {
         <h2>Give Feedback</h2>
             <Button good={good} neutral={neutral} bad={bad} setGood={setGood} setNeutral={setNeutral} setBad={setBad}/>
         <h2>Statistics</h2>
-            <Statistics good={good} neutral={neutral} bad={bad}  />
+            <table>
+                <tbody>
+                    <Statistics text='Good' data={good} />
+                    <Statistics text='Neutral' data={neutral} />
+                    <Statistics text='Bad' data={bad} />
+                    <Statistics text='Total' data={total} />
+                    <Statistics text='Average' data='' />
+                    <Statistics text='Positive' data={positive} />
+                </tbody>
+            </table>
+            
       </div>
     )
   }
