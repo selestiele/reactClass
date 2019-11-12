@@ -1,28 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-// const Button = ({onClick, text}) => {
-    
-//     return (
-//         <div>
-//             <button onClick={onClick}>{text}</button>
-//             <button onClick={onClick}>{text}</button>
-//             <button onClick={onClick}>{text}</button>
-//         </div>
-//     )    
-// }
 
-// const goodClick = () => {
-//     setGood({...clicks, good: clicks.good +1});
-// }
-
-// const neutralClick = () => {
-//     setNeutral({...clicks, })
-// }
-
-// const badClick = () => {
-
-// }
 
 const Statistics = (props) => {
 
@@ -60,9 +39,9 @@ const Button = (props) => {
 const App = (props) => {
     // save clicks of each button to own state
     
-    const [good, setGood] = React.useState(0);
-    const [neutral, setNeutral] = React.useState(0);
-    const [bad, setBad] = React.useState(0);
+    const [good, setGood] = useState(0);
+    const [neutral, setNeutral] = useState(0);
+    const [bad, setBad] = useState(0);
     const total = good + neutral + bad;
     const positive = ((good/total) * 100);
     
