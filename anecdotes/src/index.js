@@ -1,34 +1,35 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 
+const MaxVotes = ({anecdotes, votes}) => {
+
+  const numVotes = Math.max(...votes);
+
+  const indexMax = votes.indexOf(numVotes);
+  console.log(indexMax);
+
+  return (
+    <>
+      <p>{anecdotes[indexMax]}</p>
+      <p>This anecdote has {votes[indexMax]} votes.</p>
+
+    </>
+  )
+
+
+      
+}
 
 
 const App = (props) => {
     
     const [selected, setSelected] = useState(0);
-    //const [vote, setVote] = useState(new Array(anecdotes.length).fill(0));
-    // const [vote, setVote] = useState(0);
-
-    const myArray = new Uint8Array(6);
+    const myArray = new Uint8Array(props.anecdotes.length);
     const [votes, setVotes] = useState(myArray);
 
-    // const anecdoteVote = {
-    //   selected,
-    //   vote
-    // }
-    
-   
-    
-    // So far, I have the vote counter to work, but it doesn't reset when the anecdote index switches. They are, however, in an object together.
-    
-    
-    
     const nextAnecdote = () => {
         setSelected(Math.floor(Math.random() * props.anecdotes.length));
     }
-
-
-
 
     const addVote = () => {
       const voteCopy = [...votes];
@@ -36,23 +37,23 @@ const App = (props) => {
       setVotes(voteCopy);
 
       console.log(voteCopy);
-     
     }
 
-     
-      
     
 
-
-     
-    return (
+  return (
       <>
+        <h2>Anecdote of the Day</h2>
         <p>{props.anecdotes[selected]}</p>
         <p>This anecdote has {votes[selected]} votes.</p>
         <div>
             <button onClick={addVote}>Add your vote!</button>
             <button onClick={nextAnecdote}>Next Anecdote</button>
         </div>
+        <h2>Anecdote with the Most Votes</h2>
+
+        <MaxVotes anecdotes={props.anecdotes} votes={votes}  />
+        
       </>
     )
 
